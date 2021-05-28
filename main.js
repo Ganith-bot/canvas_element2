@@ -1,11 +1,11 @@
+var last_positionx,last_positiony;
+var mouseEvent="empty";
+
 canvas=document.getElementById("myCanvas");
 
 ctx=canvas.getContext("2d");
 color="blue";
 width="2";
-
-var last_positionx,last_positiony;
-var mouseEvent="empty";
 
 canvas.addEventListener("mousedown",line1);
 
@@ -15,23 +15,11 @@ width=document.getElementById("width1").value;
 mouseEvent="mouseDown";
 }
 
-canvas.addEventListener("mouseup",line2);
-
-function line2(e){
-    mouseEvent="mouseUp";
-}
-
-canvas.addEventListener("mouseleave",line3);
-
-function line3(e){
-    mouseEvent="mouseLeave";
-}
-
 canvas.addEventListener("mousemove",line4);
 
 function line4(e){
     current_position_x=e.clientX-canvas.offsetLeft;
-    current_position_y=e.clientX-canvas.offsetTop;
+    current_position_y=e.clientY-canvas.offsetTop;
     if(mouseEvent=="mouseDown"){
         ctx.beginPath();
         ctx.strokeStyle=color;
@@ -47,6 +35,19 @@ function line4(e){
     last_positionx=current_position_x;
     last_positiony=current_position_y;
 }
+
+canvas.addEventListener("mouseup",line2);
+
+function line2(e){
+    mouseEvent="mouseUp";
+}
+
+canvas.addEventListener("mouseleave",line3);
+
+function line3(e){
+    mouseEvent="mouseleave";
+}
+
 function clear(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
 }
